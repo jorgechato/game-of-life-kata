@@ -4,9 +4,9 @@ from game.start import calculate_next
 
 
 class RulesTest(unittest.TestCase):
-    def test_rule1(self):
+    def test_rule1_0(self):
         """
-        any live cell with fewer than two live neighbours dies, as if cause by underpopulation (1)
+        any live cell with fewer than two live neighbours dies, as if cause by underpopulation
         """
         start = parse(4, 8, '''
                       ........
@@ -26,26 +26,49 @@ class RulesTest(unittest.TestCase):
 
         self.assertEqual(end, result, msg="Objects should be equals")
 
-    @unittest.skip("any live cell with more than three live neighbours dies, as if by overcrowding")
-    def test_rule2(self):
+    def test_rule1_1(self):
         """
-        any live cell with more than three live neighbours dies, as if by overcrowding
+        any live cell with fewer than two live neighbours dies, as if cause by underpopulation
         """
-        self.fail("shouldn't happen")
+        start = parse(4, 8, '''
+                      **......
+                      ........
+                      ........
+                      ........
+                    ''')
 
-    @unittest.skip("any dead cell with exactly three live neighbours becomes a live cell")
-    def test_rule3(self):
-        """
-        any dead cell with exactly three live neighbours becomes a live cell
-        """
-        self.fail("shouldn't happen")
+        end = parse(4, 8, '''
+                      ........
+                      ........
+                      ........
+                      ........
+                    ''')
 
-    @unittest.skip("any live cell with two or three live neighbours lives on to the next generation")
-    def test_rule4(self):
+        result = calculate_next(start)
+
+        self.assertEqual(end, result, msg="Objects should be equals")
+
+    def test_rule1_2(self):
         """
-        any live cell with two or three live neighbours lives on to the next generation
+        any live cell with fewer than two live neighbours dies, as if cause by underpopulation
         """
-        self.fail("shouldn't happen")
+        start = parse(4, 8, '''
+                      *.......
+                      *.......
+                      .......*
+                      **.....*
+                    ''')
+
+        end = parse(4, 8, '''
+                      ........
+                      ........
+                      **......
+                      ........
+                    ''')
+
+        result = calculate_next(start)
+
+        self.assertEqual(end, result, msg="Objects should be equals")
 
 
 if __name__ == '__main__':

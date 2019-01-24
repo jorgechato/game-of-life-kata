@@ -11,9 +11,10 @@ def set(x, y, value, matrix):
 
 
 def get(x, y, matrix):
-    row = matrix[y] or []
-
-    return row[x]
+    try:
+        return '' if x < 0 or y < 0 else matrix[y][x]
+    except:
+        return ''
 
 
 def parse(height, width, layout):

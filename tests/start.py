@@ -70,6 +70,50 @@ class RulesTest(unittest.TestCase):
 
         self.assertEqual(end, result, msg="Objects should be equals")
 
+    def test_rule2_0(self):
+        """
+        any live cell with more than three live neighbours dies, as if by overcrowding
+        """
+        start = parse(4, 8, '''
+                      ........
+                      ......*.
+                      .....***
+                      ......*.
+                    ''')
+
+        end = parse(4, 8, '''
+                      ........
+                      .....***
+                      .....*.*
+                      .....***
+                    ''')
+
+        result = calculate_next(start)
+
+        self.assertEqual(end, result, msg="Objects should be equals")
+
+    def test_rule2_1(self):
+        """
+        any live cell with more than three live neighbours dies, as if by overcrowding
+        """
+        start = parse(4, 8, '''
+                      **......
+                      **......
+                      *.......
+                      ........
+                    ''')
+
+        end = parse(4, 8, '''
+                      **......
+                      ........
+                      **......
+                      ........
+                    ''')
+
+        result = calculate_next(start)
+
+        self.assertEqual(end, result, msg="Objects should be equals")
+
 
 if __name__ == '__main__':
     unittest.main()

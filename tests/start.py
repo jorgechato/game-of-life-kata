@@ -180,6 +180,28 @@ class RulesTest(unittest.TestCase):
 
         self.assertEqual(end, result, msg="Objects should be equals")
 
+    def test_rule4_0(self):
+        """
+        any dead cell with exactly three live neighbours becomes a live cell
+        """
+        start = parse(4, 8, '''
+                      ........
+                      ...***..
+                      ........
+                      ........
+                    ''')
+
+        end = parse(4, 8, '''
+                      ....*...
+                      ....*...
+                      ....*...
+                      ........
+                    ''')
+
+        result = calculate_next(start)
+
+        self.assertEqual(end, result, msg="Objects should be equals")
+
 
 if __name__ == '__main__':
     unittest.main()
